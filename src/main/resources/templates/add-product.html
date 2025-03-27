@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MarsControlHub - Add Martian Resource</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #34495e;
+        }
+        h1 {
+            text-align: center;
+            color: #e74c3c; 
+        }
+        a {
+            text-decoration: none;
+            color: #e74c3c;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            border: 1px solid #e74c3c;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        a:hover {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        form {
+            width: 50%;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="number"] {
+            width: 48%;
+            display: inline-block;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>MarsControlHub - Add Martian Resource</h1>
+    <form th:action="@{/products/add}" th:object="${product}" method="post">
+        <label for="name">Resource Name:</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Enter resource name" required />
+
+        <label for="description">Description:</label>
+        <input type="text" th:field="*{description}" id="description" placeholder="Enter resource description" required />
+
+        <label for="price">Price (in Martian Credits):</label>
+        <input type="number" step="0.1" th:field="*{price}" id="price" placeholder="Enter price" min="0" required />
+
+        <button type="submit">Add Resource</button>
+    </form>
+    <a href="/products">Back to Resources</a>
+</body>
+</html>
