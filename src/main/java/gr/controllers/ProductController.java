@@ -3,21 +3,17 @@ package gr.controllers;
 import gr.models.Product;
 import gr.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-    /**
-     * Product reository
-     */
     private final ProductRepository productRepository;
 
     @Autowired
@@ -31,8 +27,7 @@ public class ProductController {
         return "products";
     }
 
-
-     @GetMapping("/add")
+    @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("product", new Product());
         return "add-product";
@@ -47,21 +42,21 @@ public class ProductController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Product product = productRepository.findById(id)
-                        .orElseThrow(() -> new IllegalArgumentException("Invalid product ID"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product ID"));
         model.addAttribute("product", product);
         return "edit-product";
     }
 
     @PostMapping("/edit/{id}")
     public String editProduct(@PathVariable Long id, @ModelAttribute Product product) {
-            product.setId(id);
-            productRepository.save(product);
-            return "redirect:/products";
+        product.setId(id);
+        productRepository.save(product);
+        return "redirect:/products";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
-            productRepository.deleteById(id);
-            return "redirect:/products";
+        productRepository.deleteById(id);
+        return "redirect:/products";
     }
 }

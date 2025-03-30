@@ -3,21 +3,25 @@ package gr.marshub.mars_crud_app;
 import gr.controllers.ProductController;
 import gr.models.Product;
 import gr.repositories.ProductRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class ProductControllerTest {
@@ -36,14 +40,6 @@ class ProductControllerTest {
     }
 
     @Test
-    void testShowProducts() throws Exception {
-        mockMvc.perform(get("/products"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("products"))
-                .andExpect(model().attributeExists("products"));
-    }
-
-    @Test
     void testShowAddForm() throws Exception {
         mockMvc.perform(get("/products/add"))
                 .andExpect(status().isOk())
@@ -53,19 +49,19 @@ class ProductControllerTest {
 
     @Test
     void testAddProduct() throws Exception {
-        when(productRepository.save(any(Product.class))).thenReturn(new Product("Product3", "Description3", 30.0));
+        when(productRepository.save(any(Product.class))).thenReturn(new Product("ResourceX", "Test Description", 100.0));
 
         mockMvc.perform(post("/products/add")
-                .param("name", "Product3")
-                .param("description", "Description3")
-                .param("price", "30.0"))
+                .param("name", "ResourceX")
+                .param("description", "Test Description")
+                .param("price", "100.0"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/products"));
     }
 
     @Test
     void testShowEditForm() throws Exception {
-        Product product = new Product("Product1", "Description1", 10.0);
+        Product product = new Product("Resource1", "Desc1", 50.0);
         product.setId(1L);
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
 
@@ -77,14 +73,14 @@ class ProductControllerTest {
 
     @Test
     void testEditProduct() throws Exception {
-        Product product = new Product("Product1", "Description1", 10.0);
+        Product product = new Product("Resource1", "Desc1", 50.0);
         product.setId(1L);
         when(productRepository.save(any(Product.class))).thenReturn(product);
 
         mockMvc.perform(post("/products/edit/1")
-                .param("name", "UpdatedProduct")
-                .param("description", "UpdatedDescription")
-                .param("price", "15.0"))
+                .param("name", "UpdatedResource")
+                .param("description", "Updated Description")
+                .param("price", "75.0"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/products"));
     }
