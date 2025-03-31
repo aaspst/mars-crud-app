@@ -14,6 +14,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+
+    /**
+     * Service layer for handling product-related operations.
+     */
     private final ProductRepository productRepository;
 
     @Autowired

@@ -6,41 +6,41 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 /**
- * Represents a product in the space station resource stock
+ * Represents a product in the space station resource stock.
  */
 @Entity
 public class Product {
 
     /**
-     * Product's unique identifier
+     * Product's unique identifier.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
-     * Product's name
+     * Product's name.
      */
     private String name;
 
     /**
-     * Product's description
+     * Product's description.
      */
     private String description;
 
     /**
-     * Product's price
+     * Product's price.
      */
     private double price;
 
     /**
-     * Default constructor declaration
+     * Default constructor declaration.
      */
     public Product() {
     }
 
     /**
-     * Core constructor
+     * Core constructor.
      *
      * @param name        the product's name
      * @param description a product's short descritpion
@@ -53,7 +53,7 @@ public class Product {
     }
 
     /**
-     * Gets the unique ID of the prodct
+     * Gets the unique ID of the prodct.
      *
      * @return the product's ID
      */
@@ -62,7 +62,7 @@ public class Product {
     }
 
     /**
-     * Sets the ID of the product
+     * Sets the ID of the product.
      *
      * @param id the products ID
      */
@@ -71,7 +71,7 @@ public class Product {
     }
 
     /**
-     * Gets the name of the product
+     * Gets the name of the product.
      *
      * @return the product's name
      */
@@ -80,7 +80,7 @@ public class Product {
     }
 
     /**
-     * Sets the name of the product
+     * Sets the name of the product.
      *
      * @param name the product's name
      */
@@ -89,7 +89,7 @@ public class Product {
     }
 
     /**
-     * Gets the product's description
+     * Gets the product's description.
      *
      * @return the product's description
      */
@@ -98,16 +98,16 @@ public class Product {
     }
 
     /**
-     * Sets the description of the porduct
+     * Sets the description of the porduct.
      *
      * @param description the product's descritpion
      */
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * Gets the price of the product
+     * Gets the price of the product.
      *
      * @return the product's price
      */
@@ -116,7 +116,7 @@ public class Product {
     }
 
     /**
-     * Sets the description of the porduct
+     * Sets the description of the porduct.
      *
      * @param price the product's price
      */
