@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mars-crud-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    container_name: mars-crud-db
+    restart: always
+    environment:
+      POSTGRES_USER: mars
+      POSTGRES_PASSWORD: mars123
+      POSTGRES_DB: marsdb
+    ports:
+      - "5432:5432"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mars-crud-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+    depends_on:
+      - backend
+
